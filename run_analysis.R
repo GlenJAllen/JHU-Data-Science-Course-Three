@@ -2,7 +2,7 @@ library(data.table)
 library(tidyverse)
 library(magrittr)
 
-# Just notices that the submission was intended to work for the working directory.
+# Just noticed that the submission was intended to work for the working directory.
 # remove base.path assignment and all references to base.path and setwd(wherever/you/have/the/data)
 
 # location of the folder where the necessary text files are stored
