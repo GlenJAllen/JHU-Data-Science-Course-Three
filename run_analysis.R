@@ -1,6 +1,7 @@
 library(data.table)
 library(tidyverse)
 library(magrittr)
+library(glue)
 
 # location of the folder where the necessary text files are stored
 base.path <- "C:/Users/u55a20/Downloads/johns_hopkins_course_3_project_data/UCI HAR Dataset"
@@ -30,13 +31,13 @@ read_data <- function(path, names, indices = NULL) {
 # (map activity codes to human-readable labels)
 # rbind train and test together for each
 # then cbind the three data frames together
-read_and_rbind <- function(file.paths, names, ...) map_dfr(file.paths, read_data, names, ...)
-app.data <- cbind(read_and_rbind(c("train/X_train.txt", "test/X_test.txt"),
-                                 relevant.feature.names,
-                                 relevant.feature.indices),
-                  read_and_rbind(c("train/y_train.txt", "test/y_test.txt"), "activity") %>%
-                    mutate(activity = activity.map[activity]),
-                  read_and_rbind(c("train/subject_train.txt", "test/subject_test.txt"), "subject"))
+read_and_rbind <- function(file.type, names, ...) {
+  .get_paths <- function(file.type) {s <- c("train", "test"); glue("{s}/{file.type}_{s}.txt")}
+  map_dfr(.get_paths(file.type), read_data, names, ...)
+}
+app.data <- cbind(read_and_rbind("X", relevant.feature.names, relevant.feature.indices),
+                  transmute(read_and_rbind("y", "activity"), activity = activity.map[activity]),
+                  read_and_rbind("subject", "subject"))
 
 # Calculate the mean for each feature for each subject/activity
 app.data %>% group_by(subject, activity) %>%
