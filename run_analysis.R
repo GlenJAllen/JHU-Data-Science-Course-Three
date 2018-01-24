@@ -2,6 +2,9 @@ library(data.table)
 library(tidyverse)
 library(magrittr)
 
+# Just notices that the submission was intended to work for the working directory.
+# remove base.path assignment and all references to base.path and setwd(wherever/you/have/the/data)
+
 # location of the folder where the necessary text files are stored
 base.path <- "C:/Users/u55a20/Downloads/johns_hopkins_course_3_project_data/UCI HAR Dataset"
 # The names of the features for the data
