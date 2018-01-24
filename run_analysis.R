@@ -45,4 +45,4 @@ app.data <- cbind(map_dfr(c("train/X_train.txt", "test/X_test.txt"),
 # Calculate the mean for each feature for each subject/activity
 app.data %>% group_by(subject, activity) %>%
   summarize_all(mean) %>%
-  write.table(file.path(base.path, "results.txt"), row.names = FALSE)
+  write.table(file_path("results.txt"), row.names = FALSE)
