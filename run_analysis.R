@@ -20,7 +20,7 @@ activity.map <- fread(file_path("activity_labels.txt"))$V2
 # and set the column names for the created data frame
 read_data <- function(path, names, indices = NULL) {
   df <- fread(file_path(path), data.table = FALSE)
-  if(!is.null(indices)) df %<>% .[, indices]
+  if(!is.null(indices)) df %<>% extract(indices)
   set_colnames(df, names)
 }
 
