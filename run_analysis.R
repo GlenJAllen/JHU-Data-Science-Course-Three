@@ -30,19 +30,15 @@ read_data <- function(path, names, indices = NULL) {
 # (map activity codes to human-readable labels)
 # rbind train and test together for each
 # then cbind the three data frames together
-app.data <- cbind(map_dfr(c("train/X_train.txt", "test/X_test.txt"),
-                          read_data,
-                          relevant.feature.names,
-                          relevant.feature.indices),
-                  map_dfr(c("train/y_train.txt", "test/y_test.txt"),
-                          read_data,
-                          "activity") %>%
+read_and_rbind <- function(file.paths, names, ...) map_dfr(file.paths, read_data, names, ...)
+app.data <- cbind(read_and_rbind(c("train/X_train.txt", "test/X_test.txt"),
+                                 relevant.feature.names,
+                                 relevant.feature.indices),
+                  read_and_rbind(c("train/y_train.txt", "test/y_test.txt"), "activity") %>%
                     mutate(activity = activity.map[activity]),
-                  map_dfr(c("train/subject_train.txt", "test/subject_test.txt"),
-                          read_data,
-                          "subject"))
+                  read_and_rbind(c("train/subject_train.txt", "test/subject_test.txt"), "subject"))
 
 # Calculate the mean for each feature for each subject/activity
 app.data %>% group_by(subject, activity) %>%
   summarize_all(mean) %>%
-  write.table(file_path("results.txt"), row.names = FALSE)
+  write.table(file.path(base.path, "results.txt"), row.names = FALSE)
