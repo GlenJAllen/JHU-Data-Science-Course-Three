@@ -16,10 +16,8 @@ run_analysis <- function() {
     map_dfr(.get_paths(file.type), .read_rename, names)
   }
   
-  # 2. Read in the column names and activity labels we'll need.
-  # the names of the features for the data
+  # 2. Read in the feature names and activity labels we'll need.
   feature.names <- fread("features.txt")$V2
-  # the labels mapping
   activity.map <- fread("activity_labels.txt")$V2
   
   # 3. Call 1. for subjects, activities, and the feature data; get rid of extraneous features; 
