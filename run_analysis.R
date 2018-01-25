@@ -5,7 +5,7 @@ library(glue)
 setwd("location/of/the/folder/where/the/necessary/text/files/are/stored")
 
 run_analysis <- function() {
-  # 1. .read_rename_rbind
+  # 1. Read, rename, rbind
   .read_rename_rbind <- function(prefix, names) {
     # create paths of the form c("train/{prefix}_train.txt", "test/{prefix}_test.txt")
     .create_paths <- function(prefix) {s <- c("train", "test"); glue("{s}/{prefix}_{s}.txt")}
