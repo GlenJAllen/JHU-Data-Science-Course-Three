@@ -19,14 +19,12 @@ run_analysis <- function() {
   # 2. Read in the column names and activity labels we'll need.
   # the names of the features for the data
   feature.names <- fread("features.txt")$V2
-  # just the indices for the mean and std features
-  relevant.feature.indices <- grep("mean\\(|std\\(", feature.names)
   # the labels mapping
   activity.map <- fread("activity_labels.txt")$V2
   
   # 3. Call 1. for subjects, activities, and the feature data; get rid of extraneous features; 
   # map activities to human-readable labels; cbind the three together to get the final data frame
-  cbind(.read_rename_rbind("X", feature.names)[, relevant.feature.indices],
+  cbind(select(.read_rename_rbind("X", feature.names), grep("mean\\(|std\\(", feature.names)),
         transmute(.read_rename_rbind("y", "activity"), activity = activity.map[activity]),
         .read_rename_rbind("subject", "subject"))
 }
