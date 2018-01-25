@@ -5,7 +5,7 @@ library(glue)
 setwd("location/of/the/folder/where/the/necessary/text/files/are/stored")
 
 run_analysis <- function() {
-  # 1. Read in the train and test data; rename the columns; rbind train and test together
+  # 1. 
   .read_rename_rbind <- function(file.type, names) {
     # create paths of the form c("train/X_train.txt", "test/X_test.txt")
     .get_paths <- function(file.type) {s <- c("train", "test"); glue("{s}/{file.type}_{s}.txt")}
