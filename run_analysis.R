@@ -9,8 +9,7 @@ run_analysis <- function() {
   .read_rename_rbind <- function(file.type, names) {
     # create paths of the form c("train/X_train.txt", "test/X_test.txt")
     .get_paths <- function(file.type) {s <- c("train", "test"); glue("{s}/{file.type}_{s}.txt")}
-    # read in data for the train and test paths from .get_paths,
-    # rename the columns and rbind the results
+    # read in the train and test data, rename the columns and rbind the results
     map_dfr(.get_paths(file.type), ~setNames(fread(., data.table = FALSE), names))
   }
   
