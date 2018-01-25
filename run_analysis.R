@@ -7,7 +7,7 @@ setwd("location/of/the/folder/where/the/necessary/text/files/are/stored")
 run_analysis <- function() {
   # 1. 
   .read_rename_rbind <- function(ftype, names) {
-    # create paths of the form c("train/ftype_train.txt", "test/ftype_test.txt")
+    # create paths of the form c("train/{ftype}_train.txt", "test/{ftype}_test.txt")
     .create_paths <- function(ftype) {s <- c("train", "test"); glue("{s}/{ftype}_{s}.txt")}
     # read in the train and test data, rename the columns and rbind the results
     map_dfr(.create_paths(ftype), ~setNames(fread(., data.table = FALSE), names))
