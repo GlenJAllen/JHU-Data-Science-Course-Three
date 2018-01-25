@@ -9,7 +9,7 @@ run_analysis <- function() {
   # 1. Read in the training and test data; rename the columns; rbind train and test together
   .read_rename_rbind <- function(file.type, names) {
     # a simple function to read in a text file and set the column names for the created data table
-    .read_rename <- function(path, names) setNames(fread(path), names)
+    .read_rename <- function(path, names) setNames(fread(path, data.table = FALSE), names)
     # get paths of the form c("train/X_train.txt", "test/X_test.txt")
     .get_paths <- function(file.type) {s <- c("train", "test"); glue("{s}/{file.type}_{s}.txt")}
     # apply .read_data to both training and test paths from .get_paths and rbind the results together
