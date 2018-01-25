@@ -11,11 +11,11 @@ run_analysis <- function() {
   # (possibly) extract relevant columns
   # rename the columns
   # rbind train and test together
-  .read_and_rbind <- function(file.type, names, ...) {
+  .read_rename_rbind <- function(file.type, names, ...) {
     # A simple function to read in a text file 
     # (possibly) extract certain columns
     # and set the column names for the created data frame
-    .read_data <- function(path, names, indices = NULL) {
+    .read_rename <- function(path, names, indices = NULL) {
       df <- fread(path, data.table = FALSE)
       if(!is.null(indices)) df %<>% extract(indices)
       set_colnames(df, names)
@@ -25,7 +25,7 @@ run_analysis <- function() {
     .get_paths <- function(file.type) {s <- c("train", "test"); glue("{s}/{file.type}_{s}.txt")}
     
     # Apply .read_data to both training and test paths from .get_paths and rbind the results together
-    map_dfr(.get_paths(file.type), .read_data, names, ...)
+    map_dfr(.get_paths(file.type), .read_rename, names, ...)
   }
  
   # The names of the features for the data
@@ -40,9 +40,9 @@ run_analysis <- function() {
   # Do the above for subjects, activities, and the feature data
   # Map activities to human-readable labels
   # cbind the three together to get the final data frame
-  cbind(.read_and_rbind("X", relevant.feature.names, relevant.feature.indices),
-        transmute(.read_and_rbind("y", "activity"), activity = activity.map[activity]),
-        .read_and_rbind("subject", "subject"))
+  cbind(.read_rename_rbind("X", relevant.feature.names, relevant.feature.indices),
+        transmute(.read_rename_rbind("y", "activity"), activity = activity.map[activity]),
+        .read_rename_rbind("subject", "subject"))
 }
 
 app.data <- run_analysis()
