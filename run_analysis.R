@@ -20,11 +20,11 @@ run_analysis <- function() {
   feature.names <- fread("features.txt")$V2
   activity.map <- fread("activity_labels.txt")$V2
   
-  # 3. Call 1. for subjects, activities, and the feature data; get rid of extraneous features; 
-  # map activities to human-readable labels; cbind the three together to get the final data frame
-  cbind(select(.read_rename_rbind("X", feature.names), grep("mean\\(|std\\(", feature.names)),
+  # 3. Call 1. for subjects, activities, and the feature data; map activities to human-readable labels;
+  # drop extraneous features; cbind the three to get the final data frame
+  cbind(.read_rename_rbind("subject", "subject"), 
         transmute(.read_rename_rbind("y", "activity"), activity = activity.map[activity]),
-        .read_rename_rbind("subject", "subject"))
+        select(.read_rename_rbind("X", feature.names), grep("mean\\(|std\\(", feature.names)))
 }
 
 app.data <- run_analysis()
