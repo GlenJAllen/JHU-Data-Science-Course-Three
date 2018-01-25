@@ -20,7 +20,7 @@ run_analysis <- function() {
   # the names of the features for the data
   feature.names <- fread("features.txt")$V2
   # just the indices for the mean and std features
-  relevant.feature.indices <- setdiff(grep("mean|std", feature.names), grep("Freq", feature.names))
+  relevant.feature.indices <- grep("mean\\(|std\\(", feature.names)
   # the labels mapping
   activity.map <- fread("activity_labels.txt")$V2
   
