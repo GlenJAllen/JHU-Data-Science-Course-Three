@@ -6,11 +6,11 @@ setwd("location/of/the/folder/where/the/necessary/text/files/are/stored")
 
 run_analysis <- function() {
   # 1. 
-  .read_rename_rbind <- function(file.type, names) {
+  .read_rename_rbind <- function(ftype, names) {
     # create paths of the form c("train/ftype_train.txt", "test/ftype_test.txt")
     .get_paths <- function(ftype) {s <- c("train", "test"); glue("{s}/{ftype}_{s}.txt")}
     # read in the train and test data, rename the columns and rbind the results
-    map_dfr(.get_paths(file.type), ~setNames(fread(., data.table = FALSE), names))
+    map_dfr(.get_paths(ftype), ~setNames(fread(., data.table = FALSE), names))
   }
   
   # 2. Read in the feature names and activity labels we'll need.
