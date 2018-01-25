@@ -7,12 +7,9 @@ library(glue)
 setwd("location/of/the/folder/where/the/necessary/text/files/are/stored")
 
 run_analysis <- function() {
-  # read in the training and test data
-  # rename the columns
-  # rbind train and test together
+  # read in the training and test data rename the columns rbind train and test together
   .read_rename_rbind <- function(file.type, names) {
-    # A simple function to read in a text file 
-    # and set the column names for the created data frame
+    # A simple function to read in a text file and set the column names for the created data frame
     .read_rename <- function(path, names) set_colnames(fread(path, data.table = FALSE), names)
     
     # get paths of the form c("train/X_train.txt", "test/X_test.txt")
