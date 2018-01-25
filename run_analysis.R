@@ -24,8 +24,8 @@ run_analysis <- function() {
   # the labels mapping
   activity.map <- fread("activity_labels.txt")$V2
   
-  # 3. Call 1. for subjects, activities, and the feature data; map activities to human-readable labels;
-  # get rid of extraneous features; cbind the three together to get the final data frame
+  # 3. Call 1. for subjects, activities, and the feature data; get rid of extraneous features; 
+  # map activities to human-readable labels; cbind the three together to get the final data frame
   cbind(.read_rename_rbind("X", feature.names)[, relevant.feature.indices],
         transmute(.read_rename_rbind("y", "activity"), activity = activity.map[activity]),
         .read_rename_rbind("subject", "subject"))
