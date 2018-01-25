@@ -21,7 +21,7 @@ run_analysis <- function() {
   # labels; drop extraneous features; cbind the three to get the final data frame
   cbind(.read_rename_rbind("subject", "subject"), 
         transmute(.read_rename_rbind("y", "activity"), activity = activity.map[activity]),
-        select(.read_rename_rbind("X", feature.names), grep("mean\\(|std\\(", feature.names)))
+        select(.read_rename_rbind("X", feature.names), grep("mean\\(|std", feature.names)))
 }
 
 app.data <- run_analysis()
