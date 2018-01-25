@@ -2,7 +2,6 @@ library(data.table)
 library(tidyverse)
 library(glue)
 
-# location of the folder where the necessary text files are stored
 setwd("location/of/the/folder/where/the/necessary/text/files/are/stored")
 
 run_analysis <- function() {
