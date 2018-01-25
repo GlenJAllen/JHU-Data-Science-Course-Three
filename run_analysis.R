@@ -1,6 +1,5 @@
 library(data.table)
 library(tidyverse)
-library(magrittr)
 library(glue)
 
 # location of the folder where the necessary text files are stored
