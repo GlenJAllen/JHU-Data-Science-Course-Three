@@ -9,19 +9,19 @@ run_analysis <- function() {
   .read_rename_rbind <- function(prefix, names) {
     # create paths of the form c("train/{prefix}_train.txt", "test/{prefix}_test.txt")
     .create_paths <- function(prefix) {s <- c("train", "test"); glue("{s}/{prefix}_{s}.txt")}
-    # read in the train and test data, rename the columns and rbind the results
-    map_dfr(.create_paths(prefix), ~setNames(fread(., data.table = FALSE), names))
+    # read in the train and test data, rbind the results and rename the columns
+    setNames(map_dfr(.create_paths(prefix), fread, data.table = FALSE), names)
   }
-  
+
   # 2. Read in the feature names and activity labels we'll need.
   feature.names <- fread("features.txt")$V2
   activity.map <- fread("activity_labels.txt")$V2
-  
-  # 3. Call 1. for subjects, activities, and the feature data; map activities to human-readable 
+
+  # 3. Call 1. for subjects, activities, and the feature data; map activities to human-readable
   # labels; drop extraneous features; cbind the three to get the final data frame
-  cbind(.read_rename_rbind("subject", "subject"), 
+  cbind(.read_rename_rbind("subject", "subject"),
         transmute(.read_rename_rbind("y", "activity"), activity = activity.map[activity]),
-        select(.read_rename_rbind("X", feature.names), grep("mean\\(|std", feature.names)))
+        .read_rename_rbind("X", feature.names)[, grep("mean\\(|std", feature.names)])
 }
 
 app.data <- run_analysis()
