@@ -7,12 +7,10 @@ setwd("location/of/the/folder/where/the/necessary/text/files/are/stored")
 run_analysis <- function() {
   # 1. Read in the train and test data; rename the columns; rbind train and test together
   .read_rename_rbind <- function(file.type, names) {
-    # read in a table and set the column names
-    .read_rename <- function(path, names) setNames(fread(path, data.table = FALSE), names)
     # get paths of the form c("train/X_train.txt", "test/X_test.txt")
     .get_paths <- function(file.type) {s <- c("train", "test"); glue("{s}/{file.type}_{s}.txt")}
-    # apply .read_data to train and test paths from .get_paths and rbind the results
-    map_dfr(.get_paths(file.type), .read_rename, names)
+    # Read in the train and test paths from .get_paths, rename the columns and rbind the results
+    map_dfr(.get_paths(file.type), ~setNames(fread(., data.table = FALSE), names))
   }
   
   # 2. Read in the feature names and activity labels we'll need.
