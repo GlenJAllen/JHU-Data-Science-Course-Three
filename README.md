@@ -9,6 +9,6 @@ See the inline comments for greater detail about how the code works.  But here's
 0. Generate paths necessary for the relevant files.
 1. Read the data in from these files with fread.
 2. Row bind the test and training sets together for each pair.
-3. Fix the activity labels and feature names.
+3. Filter out the unnecessary columns and fix the activity labels and feature names.
 4. Column bind the three newly created data sets together.
 5. Summarize to get the means for each subject/activity.
