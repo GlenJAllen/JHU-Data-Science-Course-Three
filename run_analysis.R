@@ -5,8 +5,6 @@ library(glue)
 setwd("location/of/the/folder/where/the/necessary/text/files/are/stored")
 
 run_analysis <- function() {
-  # For creating paths of the form c("train/{prefix}_train.txt", "test/{prefix}_test.txt")
-  train.test <- c("train", "test")
   # 1. Read, rename, rbind
   .read_rename_rbind <- function(prefix, names) {
     # Create paths of the form c("train/{prefix}_train.txt", "test/{prefix}_test.txt")
@@ -18,6 +16,8 @@ run_analysis <- function() {
   # 2. Read in the feature names and activity labels we'll need.
   feature.names <- fread("features.txt")$V2
   activity.map <- fread("activity_labels.txt")$V2
+  # For creating paths of the form c("train/{prefix}_train.txt", "test/{prefix}_test.txt")
+  train.test <- c("train", "test")
 
   # 3. Call 1. for subjects, activities, and the feature data
   #    cbind the three to get the final data frame
