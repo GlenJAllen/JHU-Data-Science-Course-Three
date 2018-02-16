@@ -28,6 +28,7 @@ run_analysis <- function() {
         .read_rename_rbind("X", feature.names)[, grep("mean\\(|std", feature.names)])
 }
 
+# This completes the first part of the instructions.
 app.data <- run_analysis()
 
 # 4. Calculate the mean for each feature for each subject/activity
