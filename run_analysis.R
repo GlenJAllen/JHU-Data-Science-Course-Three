@@ -11,7 +11,7 @@ run_analysis <- function() {
   .read_rename_rbind <- function(prefix, names) {
     # Create paths of the form c("train/{prefix}_train.txt", "test/{prefix}_test.txt")
     .create_paths <- function(prefix) glue("{train.test}/{prefix}_{train.test}.txt")
-    # read in the train and test data, rbind the results (map_dfr) and rename the columns
+    # read in the train and test data, rbind the results (map_dfr reads in the two files and rbinds the results) and rename the columns
     .create_paths(prefix) %>%
       map_dfr(fread, data.table = FALSE) %>%
       setNames(names)
