@@ -6,7 +6,7 @@ library(glue)
 #   You will want up-to-date versions of dplyr, purrr, data.table, and glue for:
 #   data.table::fread, purrr::map_dfr, glue::glue, dplyr::transmute, dplyr::group_by, dplyr::summarize_all, and dplyr::`%>%`
 #     Alternatively:
-#     replace pipe operators (%>%) with nested calls [lhs %>% rhs : rhs(lhs)], 
+#     replace pipe operators (%>%) with nested calls [lhs %>% rhs : rhs(lhs)] or multiple assignments, 
 #     fread with read.csv, 
 #     map_dfr(...) with do.call(rbind, lapply(...)),
 #     transmute(.read_rename_rbind("y", "activity"), activity = activity.map[activity]) with 
@@ -41,8 +41,9 @@ run_analysis <- function() {
   # 3. Call 1. for subjects, activities, and the feature data
   #    cbind the three to get the final data frame
   cbind(.read_rename_rbind("subject", "subject"),
-        # map activities to human-readable labels (activity.map[activity]) - 
-        #   works because the numeric activity codes are just the indices of the human readable codes
+        # map activities to human-readable labels 
+        #   activity.map[activity] works because the numeric activity codes are just the indices of 
+        #   the human readable codes
         transmute(.read_rename_rbind("y", "activity"), activity = activity.map[activity]),
         # drop extraneous features 
         #   grep("mean\\(|std", feature.names) gives the column indices for just the features we need
