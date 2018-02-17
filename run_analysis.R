@@ -35,7 +35,7 @@ run_analysis <- function() {
   feature.names <- fread("features.txt")$V2
   activity.map <- fread("activity_labels.txt")$V2
   # For creating paths of the form c("train/{prefix}_train.txt", "test/{prefix}_test.txt")
-  # referenced by .create_paths()
+  #   referenced by .create_paths()
   train.test <- c("train", "test")
 
   # 3. Call 1. for subjects, activities, and the feature data
