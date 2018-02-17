@@ -3,16 +3,16 @@ library(tidyverse)
 library(glue)
 
 # This code does what it says it does.  Please don't mark it otherwise before having run it.
-# You will want up-to-date versions of dplyr, purrr, data.table, and glue for:
-# data.table::fread, purrr::map_dfr, glue::glue, dplyr::transmute, dplyr::group_by, dplyr::summarize_all, and dplyr::`%>%`
-# Alternatively:
-# replace pipe operators (%>%) with nested calls [lhs %>% rhs : rhs(lhs)], 
-# fread with read.csv, 
-# map_dfr(...) with do.call(rbind, lapply(...)),
-# transmute(.read_rename_rbind("y", "activity"), activity = activity.map[activity]) with 
-#   within(.read_rename_rbind("y", "activity"), activity <- activity.map[activity]),
-# summarize_all(group_by(app.data, subject, activity), mean) with the necessary tapply logic,
-# and glue("{train.test}/{prefix}_{train.test}.txt") with paste0(train.test, "/", prefix, "_", train.test, ".txt")
+#   You will want up-to-date versions of dplyr, purrr, data.table, and glue for:
+#   data.table::fread, purrr::map_dfr, glue::glue, dplyr::transmute, dplyr::group_by, dplyr::summarize_all, and dplyr::`%>%`
+#   Alternatively:
+#   replace pipe operators (%>%) with nested calls [lhs %>% rhs : rhs(lhs)], 
+#   fread with read.csv, 
+#   map_dfr(...) with do.call(rbind, lapply(...)),
+#   transmute(.read_rename_rbind("y", "activity"), activity = activity.map[activity]) with 
+#     within(.read_rename_rbind("y", "activity"), activity <- activity.map[activity]),
+#   summarize_all(group_by(app.data, subject, activity), mean) with the necessary tapply logic,
+#   and glue("{train.test}/{prefix}_{train.test}.txt") with paste0(train.test, "/", prefix, "_", train.test, ".txt")
 
 
 setwd("location/of/the/folder/where/the/necessary/text/files/are/stored")
