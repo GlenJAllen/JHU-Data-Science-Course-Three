@@ -22,9 +22,9 @@ run_analysis <- function() {
   .read_rename_rbind <- function(prefix, names) {
     # Create paths of the form c("train/{prefix}_train.txt", "test/{prefix}_test.txt")
     .create_paths <- function(prefix) glue("{train.test}/{prefix}_{train.test}.txt")
-    # read in the train and test data, 
-    # rbind the results 
-    # [map_dfr(.create_paths(prefix), fread) reads in the two files and rbinds the results] 
+    # create the paths for train and test sets
+    # read in the train and test data and rbind the results
+    #   map_dfr(.create_paths(prefix), fread) reads in the two files and rbinds the results]
     # and rename the columns
     .create_paths(prefix) %>%
       map_dfr(fread, data.table = FALSE) %>%
@@ -44,8 +44,8 @@ run_analysis <- function() {
         # map activities to human-readable labels (activity.map[activity]) - 
         #   works because the numeric activity codes are just the indices of the human readable codes
         transmute(.read_rename_rbind("y", "activity"), activity = activity.map[activity]),
-        # drop extraneous features [grep("mean\\(|std", feature.names) gives the column 
-        #   indices for just the features we need]
+        # drop extraneous features 
+        #   grep("mean\\(|std", feature.names) gives the column indices for just the features we need
         .read_rename_rbind("X", feature.names)[, grep("mean\\(|std", feature.names)])
 }
 
