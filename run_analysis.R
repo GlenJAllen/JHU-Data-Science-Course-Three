@@ -24,7 +24,7 @@ run_analysis <- function() {
     .create_paths <- function(prefix) glue("{train.test}/{prefix}_{train.test}.txt")
     # create the paths for train and test sets
     # read in the train and test data and rbind the results
-    #   map_dfr(.create_paths(prefix), fread) reads in the two files and rbinds the results]
+    #   map_dfr(.create_paths(prefix), fread) reads in the two files and rbinds the results
     # and rename the columns
     .create_paths(prefix) %>%
       map_dfr(fread, data.table = FALSE) %>%
