@@ -42,7 +42,7 @@ run_analysis <- function() {
   #    cbind the three to get the final data frame
   cbind(.read_rename_rbind("subject", "subject"),
         # map activities to human-readable labels (activity.map[activity]) - 
-        #   dumb hack since the numeric codes are just the indices of the human readable codes
+        #   works because the numeric activity codes are just the indices of the human readable codes
         transmute(.read_rename_rbind("y", "activity"), activity = activity.map[activity]),
         # drop extraneous features [grep("mean\\(|std", feature.names) gives the column 
         #   indices for just the features we need]
