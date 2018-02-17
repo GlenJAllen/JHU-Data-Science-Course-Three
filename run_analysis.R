@@ -11,7 +11,7 @@ library(glue)
 #     map_dfr(...) with do.call(rbind, lapply(...)),
 #     transmute(.read_rename_rbind("y", "activity"), activity = activity.map[activity]) with 
 #       within(.read_rename_rbind("y", "activity"), activity <- activity.map[activity]),
-#     summarize_all(group_by(app.data, subject, activity), mean) with the necessary tapply logic,
+#     summarize_all(group_by(app.data, subject, activity), mean) with the necessary tapply logic (or however you want to do it),
 #     and glue("{train.test}/{prefix}_{train.test}.txt") with paste0(train.test, "/", prefix, "_", train.test, ".txt")
 
 
